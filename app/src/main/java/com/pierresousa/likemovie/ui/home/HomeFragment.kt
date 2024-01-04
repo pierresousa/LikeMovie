@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.pierresousa.likemovie.databinding.FragmentHomeBinding
+import com.pierresousa.likemovie.model.Movie
 
 class HomeFragment : Fragment() {
 
@@ -16,6 +16,8 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val adapter = HomeAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,12 +30,18 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        setRecyclerView()
+
+        homeViewModel.movies.observe(viewLifecycleOwner) {
+            adapter.atualiza(it)
         }
 
         return root
+    }
+
+    private fun setRecyclerView() {
+        val recyclerView = binding.fragmentHomeMoviesRecyclerview
+        recyclerView.adapter = adapter
     }
 
     override fun onDestroyView() {
