@@ -11,4 +11,5 @@
     <color name="blue_2">#062249</color>
     <color name="blue_3">#0A7ABF</color>
     <color name="blue_4">#0B9ED9</color>
+    <color name="gray_placeholder">#bcbcbc</color>
 </resources>

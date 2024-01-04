@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/movie_item_poster"
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:layout_height="170dp"
             app:srcCompat="@drawable/no_photo_available"
             android:scaleType="centerCrop"
             />
@@ -34,7 +34,7 @@
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textStyle="bold"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:fontFamily="@font/lexend"
                 />
 

@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
         setRecyclerView()
 
         homeViewModel.movies.observe(viewLifecycleOwner) {
-            adapter.atualiza(it)
+            adapter.update(it)
         }
 
         return root

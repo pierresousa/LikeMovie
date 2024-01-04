@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.pierresousa.likemovie.databinding.MovieItemBinding
+import com.pierresousa.likemovie.extensions.loadImagefromPath
 import com.pierresousa.likemovie.model.Movie
 
 class HomeAdapter(
@@ -33,6 +35,9 @@ class HomeAdapter(
                     } else {
                         View.GONE
                     }
+
+                    poster.visibility = imageViewVisibility
+                    poster.loadImagefromPath(movie.posterPath)
                 }
             }
 
@@ -50,7 +55,7 @@ class HomeAdapter(
 
     override fun getItemCount(): Int = movies.size
 
-    fun atualiza(produtos: List<Movie>) {
+    fun update(produtos: List<Movie>) {
         this.movies.clear()
         this.movies.addAll(produtos)
         notifyDataSetChanged()
