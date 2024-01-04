@@ -2,4 +2,5 @@
     <string name="app_name">LikeMovie</string>
     <string name="title_home">Início</string>
     <string name="title_saved">Salvos</string>
+    <string name="movie_item_vote">Votos</string>
 </resources>
