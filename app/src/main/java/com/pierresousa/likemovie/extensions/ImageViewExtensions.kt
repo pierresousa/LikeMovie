@@ -6,7 +6,7 @@ import com.pierresousa.likemovie.R
 import com.pierresousa.likemovie.WEB_API_BASE_URL_IMAGE
 
 fun ImageView.loadImagefromPath(
-    path: String,
+    path: String? = null,
     fallback: Int = R.drawable.no_photo_available
 ) {
     load(WEB_API_BASE_URL_IMAGE + path) {
