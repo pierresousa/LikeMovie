@@ -3,11 +3,24 @@ package com.pierresousa.likemovie.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.pierresousa.likemovie.model.Movie
+import com.pierresousa.likemovie.repository.MovieRepository
+import com.pierresousa.likemovie.webclient.MovieWebClient
 
 class HomeViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    private val repository by lazy {
+        MovieRepository(MovieWebClient())
     }
-    val text: LiveData<String> = _text
+
+    private val _movies = MutableLiveData<PagingData<Movie>>()
+
+    fun getMovies(): LiveData<PagingData<Movie>> {
+        val response = repository.getPopular().cachedIn(viewModelScope)
+        _movies.value = response.value
+        return response
+    }
 }
