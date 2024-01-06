@@ -10,20 +10,20 @@ private const val TAG = "MovieWebClient"
 class MovieWebClient {
     private val movieService: MovieService = RetrofitInitializer().movieService
 
-    suspend fun getPopular(): MovieResponse<Movie>? {
+    suspend fun getPopular(page: Int): MovieResponse<Movie> {
         return try {
-            val moviesResponse = movieService.getPopular()
+            val moviesResponse = movieService.getPopular(page = page)
             MovieResponse<Movie>(
-                page = moviesResponse?.page,
-                totalPages = moviesResponse?.totalPages,
-                totalResults = moviesResponse?.totalResults,
+                page = moviesResponse.page,
+                totalPages = moviesResponse.totalPages,
+                totalResults = moviesResponse.totalResults,
                 results = moviesResponse.results?.map { movieResponse ->
                     movieResponse.movie
-                } ?: emptyList()
+                } ?: throw Exception("No result")
             )
         } catch (e: Exception) {
             Log.e(TAG, "getPopular: ", e)
-            null
+            MovieResponse<Movie>()
         }
     }
 }

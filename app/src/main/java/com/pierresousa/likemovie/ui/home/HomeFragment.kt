@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.pierresousa.likemovie.databinding.FragmentHomeBinding
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -31,8 +33,10 @@ class HomeFragment : Fragment() {
 
         setRecyclerView()
 
-        homeViewModel.movies.observe(viewLifecycleOwner) {
-            adapter.update(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            homeViewModel.getMovies().observe(viewLifecycleOwner) {
+                adapter.submitData(lifecycle, it)
+            }
         }
 
         return root

@@ -3,16 +3,14 @@ package com.pierresousa.likemovie.ui.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.pierresousa.likemovie.databinding.MovieItemBinding
 import com.pierresousa.likemovie.extensions.loadImagefromPath
 import com.pierresousa.likemovie.model.Movie
 
-class HomeAdapter(
-    movies: List<Movie> = emptyList()
-) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
-    private val movies = movies.toMutableList()
-
+class HomeAdapter() : PagingDataAdapter<Movie, HomeAdapter.ViewHolder>(MovieComparator) {
     inner class ViewHolder(private val binding: MovieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private lateinit var movie: Movie
@@ -39,6 +37,17 @@ class HomeAdapter(
         }
     }
 
+    object MovieComparator : DiffUtil.ItemCallback<Movie>() {
+        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = MovieItemBinding.inflate(inflater, parent, false)
@@ -46,15 +55,8 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie = movies[position]
-        holder.assignsProperties(movie)
-    }
-
-    override fun getItemCount(): Int = movies.size
-
-    fun update(produtos: List<Movie>) {
-        this.movies.clear()
-        this.movies.addAll(produtos)
-        notifyDataSetChanged()
+        getItem(position)?.let {
+            holder.assignsProperties(it)
+        }
     }
 }
