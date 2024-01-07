@@ -15,8 +15,10 @@ A seguir, serão destacados os progressos já realizados no desenvolvimento do a
 * Paginação dos filmes populares.
 * Salvar, listar e remover filmes favoritos.
 
-[likemovie_list.webm](https://github.com/pierresousa/LikeMovie/assets/45207673/bfbaab7b-8e20-4624-9f1d-41f36d603023)
-[likemovie_save.webm](https://github.com/pierresousa/LikeMovie/assets/45207673/2a2a9768-a0b4-45a0-803f-4260dde6d0b3)
+
+https://github.com/pierresousa/LikeMovie/assets/45207673/dd6468ad-3967-4b03-a9d0-76b4d9658785
+
+https://github.com/pierresousa/LikeMovie/assets/45207673/57bde2ee-39fc-4062-a9dc-dd610290c6d1
 
 
 Para isso, foram utilizadas as seguintes tecnologias:
