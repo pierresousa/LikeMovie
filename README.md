@@ -15,6 +15,10 @@ A seguir, serão destacados os progressos já realizados no desenvolvimento do a
 * Paginação dos filmes populares.
 * Salvar, listar e remover filmes favoritos.
 
+[likemovie_list.webm](https://github.com/pierresousa/LikeMovie/assets/45207673/bfbaab7b-8e20-4624-9f1d-41f36d603023)
+[likemovie_save.webm](https://github.com/pierresousa/LikeMovie/assets/45207673/2a2a9768-a0b4-45a0-803f-4260dde6d0b3)
+
+
 Para isso, foram utilizadas as seguintes tecnologias:
 
 ### API TMDB
