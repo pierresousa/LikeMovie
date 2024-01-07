@@ -6,18 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.saved.SavedFragment">
 
-    <TextView
-        android:id="@+id/text_saved"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:fontFamily="@font/lexend"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_saved_movies_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/movie_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

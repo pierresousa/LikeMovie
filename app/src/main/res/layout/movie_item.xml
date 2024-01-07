@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="170dp"
             app:srcCompat="@drawable/no_photo_available"
-            android:scaleType="centerCrop"
-            />
+            android:scaleType="centerCrop"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,12 +84,11 @@
                     app:layout_constraintStart_toEndOf="@id/movie_item_image_vote"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
-
                 <ImageView
                     android:id="@+id/movie_item_save"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:scaleType="centerCrop"
                     app:srcCompat="@drawable/ic_bookmark_border_24"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"

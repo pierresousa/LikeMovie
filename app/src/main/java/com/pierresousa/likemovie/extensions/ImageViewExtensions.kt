@@ -15,3 +15,14 @@ fun ImageView.loadImagefromPath(
         placeholder(R.drawable.photo_placeholder)
     }
 }
+
+fun ImageView.loadImage(
+    path: Any? = null,
+    fallback: Int = R.drawable.no_photo_available
+) {
+    load(path) {
+        fallback(fallback)
+        error(R.drawable.image_error)
+        placeholder(R.drawable.photo_placeholder)
+    }
+}

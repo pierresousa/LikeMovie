@@ -13,10 +13,6 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
 
-//    private val repository by lazy {
-//        MovieRepository(MovieWebClient())
-//    }
-
     private val _movies = MutableLiveData<PagingData<Movie>>()
 
     fun getMovies(): LiveData<PagingData<Movie>> {

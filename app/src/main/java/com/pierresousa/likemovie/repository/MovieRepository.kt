@@ -28,5 +28,9 @@ class MovieRepository(
     suspend fun save(movie: Movie) {
         dao.save(movie)
     }
+
+    fun getSaves(): LiveData<List<Movie>> {
+        return dao.getAll()
+    }
 }
 
