@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.pierresousa.likemovie.MainApplication
+import com.pierresousa.likemovie.R
 import com.pierresousa.likemovie.databinding.FragmentHomeBinding
+import com.pierresousa.likemovie.repository.MovieRepository
+import com.pierresousa.likemovie.webclient.MovieWebClient
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -20,13 +24,21 @@ class HomeFragment : Fragment() {
 
     private val adapter = HomeAdapter()
 
+    private val homeViewModel: HomeViewModel by viewModels {
+        HomeViewModelFactory(
+            MovieRepository(
+                MovieWebClient(),
+                (requireActivity().application as MainApplication).database.movieDao()
+            )
+        )
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -45,6 +57,16 @@ class HomeFragment : Fragment() {
     private fun setRecyclerView() {
         val recyclerView = binding.fragmentHomeMoviesRecyclerview
         recyclerView.adapter = adapter
+        adapter.callBackSave = { movie ->
+            homeViewModel.save(movie)
+        }
+        adapter.callBackGetById = { id, imageview ->
+            homeViewModel.getById(id).observe(viewLifecycleOwner) { movie ->
+                if (movie != null) {
+                    imageview.setImageResource(R.drawable.ic_bookmark_blue)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

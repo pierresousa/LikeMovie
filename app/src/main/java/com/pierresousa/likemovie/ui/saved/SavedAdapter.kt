@@ -1,29 +1,30 @@
-package com.pierresousa.likemovie.ui.home
+package com.pierresousa.likemovie.ui.saved
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.pierresousa.likemovie.R
 import com.pierresousa.likemovie.databinding.MovieItemBinding
 import com.pierresousa.likemovie.extensions.loadImagefromPath
 import com.pierresousa.likemovie.model.Movie
 
-class HomeAdapter(
-    var callBackSave: (movie: Movie) -> Unit = {},
-    var callBackGetById: (id: Int, imageView: ImageView) -> Unit = { id: Int, imageView: ImageView -> }
-) :
-    PagingDataAdapter<Movie, HomeAdapter.ViewHolder>(MovieComparator) {
+class SavedAdapter(
+    movies: List<Movie> = emptyList<Movie>(),
+    var callBackDelete: (movie: Movie) -> Unit = {}
+) : RecyclerView.Adapter<SavedAdapter.ViewHolder>() {
+
+    private val movies = movies.toMutableList()
+
     inner class ViewHolder(private val binding: MovieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         private lateinit var movie: Movie
 
         init {
             binding.movieItemSave.setOnClickListener {
                 if (::movie.isInitialized) {
-                    callBackSave(movie)
+                    callBackDelete(movie)
                 }
             }
         }
@@ -49,19 +50,8 @@ class HomeAdapter(
             poster.loadImagefromPath(movie.posterPath)
 
             val saveIcon = binding.movieItemSave
-            callBackGetById(movie.id, saveIcon)
+            saveIcon.setImageResource(R.drawable.ic_bookmark_blue)
         }
-    }
-
-    object MovieComparator : DiffUtil.ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem == newItem
-        }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -71,8 +61,16 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItem(position)?.let {
-            holder.assignsProperties(it)
-        }
+        val movie = movies[position]
+        holder.assignsProperties(movie)
     }
+
+    override fun getItemCount(): Int = movies.size
+
+    fun update(movies: List<Movie>) {
+        this.movies.clear()
+        this.movies.addAll(movies)
+        notifyDataSetChanged()
+    }
+
 }

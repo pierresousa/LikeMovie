@@ -8,13 +8,9 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.pierresousa.likemovie.model.Movie
 import com.pierresousa.likemovie.repository.MovieRepository
-import com.pierresousa.likemovie.webclient.MovieWebClient
+import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
-
-    private val repository by lazy {
-        MovieRepository(MovieWebClient())
-    }
+class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
 
     private val _movies = MutableLiveData<PagingData<Movie>>()
 
@@ -22,5 +18,13 @@ class HomeViewModel : ViewModel() {
         val response = repository.getPopular().cachedIn(viewModelScope)
         _movies.value = response.value
         return response
+    }
+
+    fun save(movie: Movie) = viewModelScope.launch {
+        repository.save(movie)
+    }
+
+    fun getById(id: Int): LiveData<Movie?> {
+        return repository.getById(id)
     }
 }

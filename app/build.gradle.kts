@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp").version("1.6.10-1.0.4")
+    id("kotlin-kapt")
 }
 
 android {
@@ -48,6 +49,11 @@ dependencies {
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     implementation("androidx.paging:paging-runtime:3.1.1")
+
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
