@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.pierresousa.likemovie.MainApplication
+import com.pierresousa.likemovie.R
 import com.pierresousa.likemovie.databinding.FragmentHomeBinding
 import com.pierresousa.likemovie.repository.MovieRepository
 import com.pierresousa.likemovie.webclient.MovieWebClient
@@ -38,17 +39,6 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        val homeViewModel =
-//            ViewModelProvider(this).get(HomeViewModel::class.java)
-
-//        val saved = homeViewModel.save(
-//            Movie(id = 695721,
-//            title = "The Family Plan",
-//            overview = "teste",
-//            voteAverage = 5.5,
-//            voteCount = 10,
-//            posterPath = "/3CezGI4ORSgVKk5Ch3UUWtL7SET.jpg")
-//        )
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -69,6 +59,13 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = adapter
         adapter.callBackSave = { movie ->
             homeViewModel.save(movie)
+        }
+        adapter.callBackGetById = { id, imageview ->
+            homeViewModel.getById(id).observe(viewLifecycleOwner) { movie ->
+                if (movie != null) {
+                    imageview.setImageResource(R.drawable.ic_bookmark_blue)
+                }
+            }
         }
     }
 

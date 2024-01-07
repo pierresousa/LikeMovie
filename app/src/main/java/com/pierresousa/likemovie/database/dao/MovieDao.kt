@@ -18,4 +18,7 @@ interface MovieDao {
 
     @Delete
     suspend fun delete(movie: Movie)
+
+    @Query("SELECT * FROM Movie WHERE id = :id")
+    fun getById(id: Int): LiveData<Movie?>
 }

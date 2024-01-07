@@ -36,5 +36,9 @@ class MovieRepository(
     suspend fun delete(movie: Movie) {
         dao.delete(movie)
     }
+
+    fun getById(id: Int): LiveData<Movie?> {
+        return dao.getById(id)
+    }
 }
 

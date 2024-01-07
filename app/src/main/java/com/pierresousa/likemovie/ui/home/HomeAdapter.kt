@@ -3,6 +3,7 @@ package com.pierresousa.likemovie.ui.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +11,10 @@ import com.pierresousa.likemovie.databinding.MovieItemBinding
 import com.pierresousa.likemovie.extensions.loadImagefromPath
 import com.pierresousa.likemovie.model.Movie
 
-class HomeAdapter(var callBackSave: (movie: Movie) -> Unit = {}) :
+class HomeAdapter(
+    var callBackSave: (movie: Movie) -> Unit = {},
+    var callBackGetById: (id: Int, imageView: ImageView) -> Unit = { id: Int, imageView: ImageView -> }
+) :
     PagingDataAdapter<Movie, HomeAdapter.ViewHolder>(MovieComparator) {
     inner class ViewHolder(private val binding: MovieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -43,6 +47,9 @@ class HomeAdapter(var callBackSave: (movie: Movie) -> Unit = {}) :
 
             poster.visibility = imageViewVisibility
             poster.loadImagefromPath(movie.posterPath)
+
+            val saveIcon = binding.movieItemSave
+            callBackGetById(movie.id, saveIcon)
         }
     }
 

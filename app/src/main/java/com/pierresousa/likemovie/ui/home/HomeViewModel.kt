@@ -23,4 +23,8 @@ class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
     fun save(movie: Movie) = viewModelScope.launch {
         repository.save(movie)
     }
+
+    fun getById(id: Int): LiveData<Movie?> {
+        return repository.getById(id)
+    }
 }

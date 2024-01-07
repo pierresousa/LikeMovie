@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.pierresousa.likemovie.R
 import com.pierresousa.likemovie.databinding.MovieItemBinding
 import com.pierresousa.likemovie.extensions.loadImagefromPath
 import com.pierresousa.likemovie.model.Movie
@@ -47,6 +48,9 @@ class SavedAdapter(
 
             poster.visibility = imageViewVisibility
             poster.loadImagefromPath(movie.posterPath)
+
+            val saveIcon = binding.movieItemSave
+            saveIcon.setImageResource(R.drawable.ic_bookmark_blue)
         }
     }
 
