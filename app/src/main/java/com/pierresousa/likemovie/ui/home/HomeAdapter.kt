@@ -10,11 +10,19 @@ import com.pierresousa.likemovie.databinding.MovieItemBinding
 import com.pierresousa.likemovie.extensions.loadImagefromPath
 import com.pierresousa.likemovie.model.Movie
 
-class HomeAdapter() : PagingDataAdapter<Movie, HomeAdapter.ViewHolder>(MovieComparator) {
+class HomeAdapter(var callBackSave: (movie: Movie) -> Unit = {}) :
+    PagingDataAdapter<Movie, HomeAdapter.ViewHolder>(MovieComparator) {
     inner class ViewHolder(private val binding: MovieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private lateinit var movie: Movie
 
+        init {
+            binding.movieItemSave.setOnClickListener {
+                if (::movie.isInitialized) {
+                    callBackSave(movie)
+                }
+            }
+        }
         fun assignsProperties(movie: Movie) {
             this.movie = movie
 
