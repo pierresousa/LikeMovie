@@ -41,6 +41,9 @@ Para isso, foram utilizadas as seguintes tecnologias:
 ### Paging3
 > Dependência para realizar a paginação dos dados.
 
+### Room
+> Dependência para salvar dados localmente.
+
 ## Não desenvolvido
 
 * Cadastro e login de usuário.
