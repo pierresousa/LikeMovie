@@ -4,16 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.pierresousa.likemovie.R
 import com.pierresousa.likemovie.databinding.MovieItemBinding
-import com.pierresousa.likemovie.extensions.loadImage
 import com.pierresousa.likemovie.extensions.loadImagefromPath
 import com.pierresousa.likemovie.model.Movie
-import java.io.File
 
 class SavedAdapter(
-    movies: List<Movie> = emptyList<Movie>()
+    movies: List<Movie> = emptyList<Movie>(),
+    var callBackDelete: (movie: Movie) -> Unit = {}
 ) : RecyclerView.Adapter<SavedAdapter.ViewHolder>() {
 
     private val movies = movies.toMutableList()
@@ -22,6 +19,14 @@ class SavedAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var movie: Movie
+
+        init {
+            binding.movieItemSave.setOnClickListener {
+                if (::movie.isInitialized) {
+                    callBackDelete(movie)
+                }
+            }
+        }
 
         fun assignsProperties(movie: Movie) {
             this.movie = movie

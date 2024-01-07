@@ -8,7 +8,6 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.pierresousa.likemovie.model.Movie
 import com.pierresousa.likemovie.repository.MovieRepository
-import com.pierresousa.likemovie.webclient.MovieWebClient
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: MovieRepository) : ViewModel() {

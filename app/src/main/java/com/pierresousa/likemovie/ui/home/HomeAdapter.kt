@@ -23,6 +23,7 @@ class HomeAdapter(var callBackSave: (movie: Movie) -> Unit = {}) :
                 }
             }
         }
+
         fun assignsProperties(movie: Movie) {
             this.movie = movie
 

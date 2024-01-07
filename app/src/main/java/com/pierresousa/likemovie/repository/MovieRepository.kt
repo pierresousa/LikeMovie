@@ -32,5 +32,9 @@ class MovieRepository(
     fun getSaves(): LiveData<List<Movie>> {
         return dao.getAll()
     }
+
+    suspend fun delete(movie: Movie) {
+        dao.delete(movie)
+    }
 }
 
